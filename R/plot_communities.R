@@ -71,7 +71,7 @@ plot_communities <- function(comm_df, qc_df=NULL, info_df=NULL){
       }
     }
     samp.df = comm_df %>% dplyr::group_by(.data$sample) %>%
-      dplyr::mutate(ntot=dplyr::n()) %>% dplyr::ungroup(.data) %>% 
+      dplyr::mutate(ntot=dplyr::n()) %>% dplyr::ungroup() %>% 
       dplyr::group_by(.data$sample, .data$community) %>%
       dplyr::summarize(prop=dplyr::n()/.data$ntot[1])
     ggp.l$sample = ggplot(samp.df, aes(community, prop, fill=sample)) +
