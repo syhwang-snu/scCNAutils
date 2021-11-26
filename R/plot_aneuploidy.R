@@ -39,7 +39,7 @@ plot_aneuploidy <- function(ge_df, comm_df=NULL, baseline_cells=NULL, baseline_c
   ge.chr = ge.chr %>% dplyr::group_by(.data$community, .data$chr, .data$cell) %>%
     dplyr::summarize(exp=stats::median(.data$exp))
   norm.ge = ge.chr %>% dplyr::filter(.data$cell %in% baseline_cells) %>%
-    dplyr::ungroup(.data) %>% 
+    dplyr::ungroup() %>% 
     dplyr::group_by(.data$chr) %>%
     dplyr::summarize(exp.norm=stats::median(.data$exp))
   ge.chr = merge(ge.chr, norm.ge)
