@@ -47,7 +47,7 @@ qc_cells <- function(ge_df, cell_cycle=NULL){
       dplyr::filter(.data$ge.mean>0) %>% dplyr::group_by(.data$phase, .data$cell) %>%
       dplyr::summarize(ge=mean(log(.data$ge+1)))
     ## Scale and add columns for each phase to the main df
-    ge.cc = ge.cc %>% dplyr::ungroup(.data) %>% dplyr::group_by(.data$phase) %>%
+    ge.cc = ge.cc %>% dplyr::ungroup() %>% dplyr::group_by(.data$phase) %>%
       dplyr::mutate(ge=scale(.data$ge)) %>% tidyr::spread('phase', 'ge')
     if(nrow(ge.cc) > 0){
       qc.df = merge(qc.df, ge.cc)
